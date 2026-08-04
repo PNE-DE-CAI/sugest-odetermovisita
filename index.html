@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OMASP 2026 · Relatório de Visita PEC — Dia de Aplicação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    @page{size:A4 portrait;margin:10mm 12mm}
+    :root{
+      --navy:#0a2f6c;--navy-deep:#041a3a;
+      --red:#d32f2f;--gold:#ffec9e;--gold-solid:#e8b930;
+      --green:#16a34a;--orange:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;
+      --fd:'Syne',sans-serif;--fb:'Source Serif 4',Georgia,serif;
+      --bg:#071525;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:var(--fb);background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:16px;-webkit-font-smoothing:antialiased}
+
+    .snav{position:sticky;top:0;z-index:200;background:#0f1a24;border-radius:16px;padding:8px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;border:1px solid #2c4c6e;max-width:210mm;width:100%;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+    .snav button{background:var(--navy);color:white;border:1px solid rgba(255,255,255,0.1);border-radius:30px;padding:7px 16px;font-family:var(--fd);font-weight:700;font-size:11px;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:5px}
+    .snav button:hover{background:var(--red);transform:scale(1.03)}
+    .snav button.green-btn{background:var(--green)}.snav button.green-btn:hover{background:#15803d}
+    .snav button.orange-btn{background:var(--orange)}.snav button.orange-btn:hover{background:#d97706}
+    .snav .sep{width:1px;height:18px;background:#2c4c6e}
+    .snav .lbl{font-family:var(--fd);font-size:8px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em}
+    .snav .save-ind{font-family:var(--fd);font-size:8px;font-weight:700;color:var(--green);opacity:0;transition:opacity 0.3s}
+    .snav .save-ind.show{opacity:1}
+
+    .page{width:210mm;min-height:297mm;background:white;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3);margin-bottom:14px;page-break-after:always}
+    .page:last-child{page-break-after:auto}
+    .band{height:6mm;background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 72%,var(--red) 72%,var(--red) 100%)}
+    .inner{padding:5mm 13mm 8mm}
+
+    .hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3mm}
+    .hdr-l h1{font-family:var(--fd);font-weight:800;font-size:13pt;color:var(--navy);line-height:1.15;margin-bottom:1mm}
+    .hdr-l .sub{font-family:var(--fd);font-size:6pt;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.1em}
+    .hdr-r{text-align:right}
+    .hdr-badge{font-family:var(--fd);font-weight:800;font-size:6pt;color:white;background:var(--navy);padding:1.5mm 4mm;border-radius:2mm;display:inline-block;margin-bottom:1mm}
+    .hdr-doc{font-family:var(--fd);font-weight:800;font-size:5.5pt;color:var(--red);text-transform:uppercase;letter-spacing:0.06em}
+    .dv{height:0;border-top:2px solid var(--navy);margin-bottom:3.5mm}
+
+    .frm-row{display:flex;gap:2mm;align-items:center;margin-bottom:2mm}
+    .frm-label{font-family:var(--fd);font-weight:700;font-size:6pt;color:var(--navy);text-transform:uppercase;letter-spacing:0.04em;min-width:28mm;flex-shrink:0}
+    .frm-input{flex:1;border:none;border-bottom:1px solid #cbd5e1;padding:1mm 1mm;font-family:var(--fb);font-size:7.5pt;color:#1e293b;outline:none;background:transparent;transition:border-color 0.2s}
+    .frm-input:focus{border-bottom-color:var(--navy)}
+    .frm-input::placeholder{color:#cbd5e1;font-style:italic}
+    textarea.frm-input{border:1px solid #e2e8f0;border-radius:2mm;padding:2mm;resize:vertical;min-height:12mm;width:100%;font-family:var(--fb);font-size:7pt;line-height:1.6}
+    textarea.frm-input:focus{border-color:var(--navy);outline:none}
+    textarea.frm-input.small{min-height:8mm}
+    textarea.frm-input.medium{min-height:18mm}
+    textarea.frm-input.large{min-height:24mm}
+
+    .frm-chk{display:flex;align-items:flex-start;gap:1.5mm;padding:1mm 0;cursor:pointer;user-select:none}
+    .frm-chk input[type=checkbox]{width:3.5mm;height:3.5mm;accent-color:var(--green);margin-top:0.4mm;cursor:pointer;flex-shrink:0}
+    .frm-chk span{font-size:6.5pt;color:#475569;line-height:1.35}
+    .frm-chk:hover span{color:var(--navy)}
+
+    .frm-select{border:none;border-bottom:1px solid #cbd5e1;padding:1mm 1mm;font-family:var(--fb);font-size:7pt;color:#1e293b;outline:none;background:transparent;cursor:pointer}
+    .frm-select:focus{border-bottom-color:var(--navy)}
+
+    .chk-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5mm 4mm}
+
+    .sec{margin-bottom:3.5mm}
+    .sec-hdr{display:flex;align-items:center;gap:2mm;margin-bottom:2mm}
+    .sec-num{font-family:var(--fd);font-weight:800;font-size:7.5pt;color:white;background:var(--navy);width:5.5mm;height:5.5mm;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .sec-title{font-family:var(--fd);font-weight:800;font-size:7.5pt;color:var(--navy);text-transform:uppercase;letter-spacing:0.04em}
+    .sec-line{height:0;border-top:1.5px solid #e2e8f0;margin-bottom:2mm}
+    .sec p{font-size:7pt;line-height:1.65;color:#1e293b;text-align:justify;margin-bottom:1.5mm}
+    .sec p strong{color:var(--navy)}
+
+    .info-tbl{width:100%;border-collapse:collapse;margin-bottom:3.5mm;border:1.5px solid var(--navy);border-radius:2mm;overflow:hidden}
+    .info-tbl th{background:var(--navy);color:white;padding:2mm 2.5mm;text-align:left;font-family:var(--fd);font-weight:700;font-size:5.5pt;text-transform:uppercase;letter-spacing:0.04em;width:26%}
+    .info-tbl td{padding:2mm 2.5mm;border-bottom:0.5px solid #edf0f4}
+
+    .timeline{margin-bottom:4mm}
+    .tl-row{display:grid;grid-template-columns:18mm 1fr;gap:2mm;align-items:flex-start;margin-bottom:0.5mm}
+    .tl-time{font-family:var(--fd);font-weight:800;font-size:7pt;text-align:right;padding-top:0.8mm}
+    .tl-time.morning{color:var(--orange)}.tl-time.exam{color:var(--red)}.tl-time.afternoon{color:var(--blue)}
+    .tl-bar{display:flex;align-items:flex-start;gap:2mm}
+    .tl-dot{width:3mm;height:3mm;border-radius:50%;flex-shrink:0;margin-top:1mm}
+    .tl-dot.orange{background:var(--orange)}.tl-dot.red{background:var(--red)}.tl-dot.blue{background:var(--blue)}.tl-dot.green{background:var(--green)}.tl-dot.navy{background:var(--navy)}
+    .tl-content{font-size:6.5pt;line-height:1.4;color:#475569;flex:1;padding-bottom:1mm;border-bottom:0.5px solid #f0f4f8}
+    .tl-content strong{color:var(--navy)}
+    .tl-content .tl-sub{font-size:6pt;color:#94a3b8;margin-top:0.3mm}
+    .tl-section-label{font-family:var(--fd);font-weight:800;font-size:6pt;text-transform:uppercase;letter-spacing:0.08em;padding:1.5mm 0 1mm 20mm}
+    .tl-section-label.orange{color:var(--orange)}.tl-section-label.red{color:var(--red)}.tl-section-label.blue{color:var(--blue)}
+
+    .stbl{width:100%;border-collapse:collapse;font-size:6.5pt;margin-bottom:2.5mm}
+    .stbl th{background:#f0f4f8;color:var(--navy);padding:1.8mm 2mm;text-align:left;font-family:var(--fd);font-weight:700;font-size:5pt;text-transform:uppercase;letter-spacing:0.04em;border-bottom:1.5px solid var(--navy)}
+    .stbl td{padding:1.8mm 2mm;border-bottom:0.5px solid #edf0f4}
+
+    .tk-table{width:100%;border-collapse:collapse;font-size:6.5pt;margin-bottom:2.5mm}
+    .tk-table th{background:var(--navy);color:white;padding:2mm 2.5mm;text-align:left;font-family:var(--fd);font-weight:700;font-size:5pt;text-transform:uppercase;letter-spacing:0.04em}
+    .tk-table th:first-child{border-radius:1.2mm 0 0 0}.tk-table th:last-child{border-radius:0 1.2mm 0 0}
+    .tk-table td{padding:2mm 2.5mm;border-bottom:0.5px solid #edf0f4}
+    .tk-table tr:nth-child(even){background:#f8fafc}
+    .tk-badge{display:inline-block;padding:0.6mm 2.5mm;border-radius:1.5mm;font-family:var(--fd);font-weight:800;font-size:5pt;color:white;text-transform:uppercase;letter-spacing:0.03em}
+    .tk-badge.blue{background:#3b82f6}.tk-badge.purple{background:#8b5cf6}.tk-badge.orange{background:var(--orange)}.tk-badge.green{background:var(--green)}
+
+    .qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-bottom:3.5mm}
+    .qa-box{border:1.5px solid #e2e8f0;border-radius:2.5mm;padding:2.5mm 3mm}
+    .qa-box.orange{border-color:var(--orange);border-width:2px}
+    .qa-box.blue{border-color:var(--blue);border-width:2px}
+    .qa-box .qa-t{font-family:var(--fd);font-weight:800;font-size:6.5pt;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:1.5mm;display:flex;align-items:center;gap:1.5mm}
+    .qa-box.orange .qa-t{color:var(--orange)}.qa-box.blue .qa-t{color:var(--blue)}
+    .qa-box .qa-badge{font-size:4.5pt;color:white;padding:0.4mm 1.5mm;border-radius:1mm;font-weight:700}
+    .qa-box.orange .qa-badge{background:var(--orange)}.qa-box.blue .qa-badge{background:var(--blue)}
+    .qa-row{display:flex;align-items:center;gap:1.5mm;padding:1mm 0;border-bottom:0.5px solid #f0f4f8;font-size:6pt;color:#475569}
+    .qa-row:last-child{border-bottom:none}
+    .qa-row .qr{font-weight:600;color:var(--navy);min-width:35mm;font-size:5.5pt}
+
+    .hl-box{border-radius:2mm;padding:2.5mm 3mm;margin-bottom:2.5mm}
+    .hl-box.orange{background:#fff8e1;border-left:3px solid var(--orange)}
+    .hl-box.red{background:#fff5f5;border-left:3px solid var(--red)}
+    .hl-box.green{background:#f0fdf4;border-left:3px solid var(--green)}
+    .hl-box.blue{background:#eff6ff;border-left:3px solid var(--blue)}
+    .hl-box .hl-t{font-family:var(--fd);font-weight:800;font-size:6pt;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8mm}
+    .hl-box.orange .hl-t{color:var(--orange)}.hl-box.red .hl-t{color:var(--red)}.hl-box.green .hl-t{color:var(--green)}.hl-box.blue .hl-t{color:var(--blue)}
+    .hl-box p{font-size:6.5pt;line-height:1.4;color:#475569;margin:0}
+
+    .sig-area{display:flex;gap:8mm;margin-top:6mm;margin-bottom:2mm}
+    .sig-block{flex:1;text-align:center}
+    .sig-line{border-top:1px solid #1e293b;margin-top:10mm;margin-bottom:1mm}
+    .sig-label{font-family:var(--fd);font-size:5pt;font-weight:700;color:#475569}
+    .sig-sub{font-size:4.5pt;color:#94a3b8;margin-top:0.3mm}
+
+    .foot{border-top:2px solid var(--navy);padding-top:2.5mm;display:flex;justify-content:space-between;align-items:flex-end}
+    .foot-l{font-family:var(--fd);font-size:5pt;color:#94a3b8;line-height:1.5}
+    .foot-l strong{color:var(--navy);font-weight:800}
+    .foot-r{text-align:right;font-family:var(--fd);font-size:4.5pt;color:#94a3b8;font-weight:600}
+
+    @media print{
+      body{background:white;padding:0;margin:0}
+      .page{box-shadow:none;width:100%;min-height:auto;margin-bottom:0}
+      .snav{display:none!important}
+      .band,.info-tbl th,.sec-num,.hdr-badge,.tk-table th,.tk-badge,.qa-box,.hl-box,.tl-dot,.tl-section-label{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .frm-input,.frm-select,textarea.frm-input{border-bottom-color:#999!important;border-color:#999!important}
+    }
+    @media(max-width:800px){body{padding:8px}.page{width:100%;min-height:auto;border-radius:10px}.qa-grid,.chk-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div class="snav">
+  <span class="lbl">Relatório PEC · OMASP Fase 3</span>
+  <span class="sep"></span>
+  <button class="green-btn" onclick="saveData()">&#128190; Salvar Rascunho</button>
+  <button class="orange-btn" onclick="clearData()">&#128465; Limpar Tudo</button>
+  <button onclick="window.print()">&#128424; Imprimir / PDF</button>
+  <span class="save-ind" id="saveInd">&#10003; Salvo</span>
+</div>
+
+<!-- ============ PÁGINA 1 ============ -->
+<div class="page">
+<div class="band"></div>
+<div class="inner">
+
+<div class="hdr">
+  <div class="hdr-l">
+    <h1>Relatório de Visita — Dia de Aplicação<br/>OMASP 2026 — Fase 3</h1>
+    <div class="sub">Acompanhamento Pedagógico · PEC · Tarde/Noite · URE Caieiras</div>
+  </div>
+  <div class="hdr-r">
+    <div class="hdr-badge">OMASP · FASE 3 · 06/08/2026</div><br/>
+    <div class="hdr-doc">Documento do PEC</div>
+  </div>
+</div>
+<div class="dv"></div>
+
+<table class="info-tbl">
+  <tr><th>Professor(a) PEC</th><td><input class="frm-input" data-k="pec_nome" style="width:100%" placeholder="Nome completo do PEC"></td></tr>
+  <tr><th>RG</th><td><input class="frm-input" data-k="pec_rg" style="max-width:55mm" placeholder="00.000.000-00"></td></tr>
+  <tr><th>Tipo de Visita</th><td>
+    <select class="frm-select" data-k="tipo_visita">
+      <option value="">Selecione...</option>
+      <option value="QA">QA — Qualidade de Aula</option>
+      <option value="DC">DC — Desenvolvimento Curricular</option>
+      <option value="QA+DC">QA + DC (Ambos)</option>
+    </select>
+  </td></tr>
+  <tr><th>Unidade Escolar / Polo</th><td><input class="frm-input" data-k="escola" style="width:100%" placeholder="Nome completo da escola-polo"></td></tr>
+  <tr><th>Município</th><td><input class="frm-input" data-k="municipio" style="max-width:55mm" placeholder="Ex: Franco da Rocha"></td></tr>
+  <tr><th>Data da Visita</th><td><input class="frm-input" data-k="data_visita" type="date" value="2026-08-06" style="max-width:30mm"></td></tr>
+  <tr><th>Período da Visita PEC</th><td>
+    <label class="frm-chk" style="display:inline-flex;margin-right:4mm"><input type="checkbox" data-k="p_manha"> Manhã</label>
+    <label class="frm-chk" style="display:inline-flex;margin-right:4mm"><input type="checkbox" data-k="p_tarde" checked> Tarde</label>
+    <label class="frm-chk" style="display:inline-flex"><input type="checkbox" data-k="p_noite" checked> Noite</label>
+  </td></tr>
+  <tr><th>Objetivo / Foco</th><td><strong style="font-size:7pt">Acompanhamento integral da aplicação da OMASP — Fase 3 (Etapa Estadual)</strong></td></tr>
+</table>
+
+<!-- CRONOGRAMA -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-title">Cronograma Sugerido — Dia de Aplicação (Ação Integral)</div>
+  </div>
+  <div class="sec-line"></div>
+
+  <div class="hl-box blue">
+    <div class="hl-t">Dia de Aplicação como Ação Integral</div>
+    <p>O dia da OMASP Fase 3 é tratado como uma <strong>ação de dia todo</strong>. A aplicação da prova ocorre no turno da manhã (09:00-11:00), seguida pelo acompanhamento pedagógico do PEC nos turnos da tarde e noite, contemplando análise, orientações e encerramento das atividades relacionadas à condução da aplicação.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-section-label orange">&#127749; Manhã — Preparação e Aplicação</div>
+    <div class="tl-row">
+      <div class="tl-time morning">07:30</div>
+      <div class="tl-bar"><div class="tl-dot orange"></div><div class="tl-content"><strong>Abertura do polo</strong> — Verificação de internet, energia, salas e equipamentos<div class="tl-sub">Responsável: Equipe Gestora do Polo</div></div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time morning">08:00</div>
+      <div class="tl-bar"><div class="tl-dot orange"></div><div class="tl-content"><strong>Posicionamento dos fiscais</strong> — Cada sala com mínimo de 1 fiscal</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time morning">08:15</div>
+      <div class="tl-bar"><div class="tl-dot orange"></div><div class="tl-content"><strong>Recepção dos estudantes</strong> — Conferência de lista, ponto de encontro, orientações iniciais</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time morning">08:30</div>
+      <div class="tl-bar"><div class="tl-dot orange"></div><div class="tl-content"><strong>Coleta de celulares</strong> — Dispositivos desligados e guardados</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time morning">08:45</div>
+      <div class="tl-bar"><div class="tl-dot navy"></div><div class="tl-content"><strong>Geração de tokens em lote</strong> — URE gera para cada turma · Validade: <strong style="color:var(--red)">15 minutos</strong></div></div>
+    </div>
+
+    <div class="tl-section-label red">&#128200; Manhã — Prova OMASP</div>
+    <div class="tl-row">
+      <div class="tl-time exam">09:00</div>
+      <div class="tl-bar"><div class="tl-dot red"></div><div class="tl-content" style="border-bottom:2px solid var(--red);padding-bottom:2mm"><strong style="color:var(--red);font-size:7.5pt">INÍCIO DA PROVA</strong> — Acesso liberado na Sala do Futuro<div class="tl-sub">Horário ÚNICO e IMPRORROGÁVEL · Prova online · 20 questões múltipla escolha</div></div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time exam">10:00</div>
+      <div class="tl-bar"><div class="tl-dot red"></div><div class="tl-content"><strong>Aviso: 1 hora restante</strong> — Fiscal informa aos estudantes</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time exam">10:45</div>
+      <div class="tl-bar"><div class="tl-dot red"></div><div class="tl-content"><strong>Aviso: 15 minutos restantes</strong> — Orientar "Salvar Rascunho"</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time exam">11:00</div>
+      <div class="tl-bar"><div class="tl-dot red"></div><div class="tl-content" style="border-bottom:2px solid var(--red);padding-bottom:2mm"><strong style="color:var(--red);font-size:7.5pt">FIM DA PROVA</strong> — Verificar "Finalizar Prova" de TODOS os alunos<div class="tl-sub">Nenhum acesso será liberado após este horário</div></div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time morning">11:15</div>
+      <div class="tl-bar"><div class="tl-dot orange"></div><div class="tl-content"><strong>Encerramento manhã</strong> — Devolução de celulares, registro de ocorrências no Diário de Classe</div></div>
+    </div>
+
+    <div class="tl-section-label blue">&#128218; Tarde — Visita do PEC</div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">14:00</div>
+      <div class="tl-bar"><div class="tl-dot blue"></div><div class="tl-content"><strong>Chegada do PEC ao polo</strong> — Recepção pela equipe gestora<div class="tl-sub">PEC inicia acompanhamento pedagógico pós-aplicação</div></div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">14:15</div>
+      <div class="tl-bar"><div class="tl-dot blue"></div><div class="tl-content"><strong>Reunião com equipe gestora</strong> — Relato da aplicação, ocorrências, participação dos estudantes</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">14:45</div>
+      <div class="tl-bar"><div class="tl-dot blue"></div><div class="tl-content"><strong>Análise QA (Qualidade de Aula)</strong> — Infraestrutura, atuação dos fiscais, gestão do tempo, ambiente</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">15:30</div>
+      <div class="tl-bar"><div class="tl-dot blue"></div><div class="tl-content"><strong>Análise DC (Desenvolvimento Curricular)</strong> — Registros pedagógicos, condução da aplicação, encaminhamentos</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">16:30</div>
+      <div class="tl-bar"><div class="tl-dot green"></div><div class="tl-content"><strong>Orientações à equipe</strong> — Diário de Classe, registro de ocorrências, encerramento das atividades da aplicação</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time afternoon">17:00</div>
+      <div class="tl-bar"><div class="tl-dot blue"></div><div class="tl-content"><strong>Encerramento das atividades</strong> — Finalização do relatório, assinaturas e devolução de documentos</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EQUIPE GESTORA -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-title">Equipe Gestora e Fiscais do Polo</div>
+  </div>
+  <div class="sec-line"></div>
+  <table class="stbl">
+    <thead><tr><th style="width:30%">Cargo</th><th>Nome Completo</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;font-size:6.5pt">Diretor(a) da Escola</td><td>Sr(a). <input class="frm-input" data-k="dir_nome" style="width:80%" placeholder="Nome completo"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Vice-Diretor(a)</td><td>Sr(a). <input class="frm-input" data-k="vice_nome" style="width:80%" placeholder="Nome completo"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Coordenador(a) Pedagógico(a)</td><td>Sr(a). <input class="frm-input" data-k="cgp_nome" style="width:80%" placeholder="Nome completo"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Fiscal(is) — Turma N1</td><td><input class="frm-input" data-k="fiscal_n1" style="width:80%" placeholder="Nome(s)"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Fiscal(is) — Turma N2</td><td><input class="frm-input" data-k="fiscal_n2" style="width:80%" placeholder="Nome(s)"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Fiscal(is) — Turma N3S1</td><td><input class="frm-input" data-k="fiscal_n3s1" style="width:80%" placeholder="Nome(s)"></td></tr>
+      <tr><td style="font-weight:600;font-size:6.5pt">Fiscal(is) — Turma N3S2</td><td><input class="frm-input" data-k="fiscal_n3s2" style="width:80%" placeholder="Nome(s)"></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TURMAS E TOKENS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-title">Turmas, Tokens e Resultado da Aplicação</div>
+  </div>
+  <div class="sec-line"></div>
+  <table class="tk-table">
+    <thead>
+      <tr>
+        <th style="width:50px;text-align:center">Turma</th>
+        <th>Nível / Anos</th>
+        <th style="width:35px;text-align:center">Prev.</th>
+        <th style="width:35px;text-align:center">Presentes</th>
+        <th style="width:35px;text-align:center">Ausentes</th>
+        <th style="width:42px;text-align:center">Token</th>
+        <th style="width:50px;text-align:center">Status</th>
+        <th>Obs.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center"><span class="tk-badge blue">N1S1-A</span></td>
+        <td style="font-size:6pt">Nível 1 — 6° e 7° ano</td>
+        <td style="text-align:center;font-family:var(--fd);font-weight:800;font-size:7pt">80</td>
+        <td style="text-align:center"><input class="frm-input" data-k="n1_pres" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="n1_aus" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center;font-size:5.5pt;color:var(--red);font-weight:700">15 min</td>
+        <td style="text-align:center"><select class="frm-select" data-k="n1_status" style="font-size:5.5pt"><option value="">—</option><option>OK</option><option>Ocorrência</option></select></td>
+        <td><input class="frm-input" data-k="n1_obs" style="width:100%;font-size:5.5pt" placeholder="Observações"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="tk-badge purple">N2S1-A</span></td>
+        <td style="font-size:6pt">Nível 2 — 8° e 9° ano</td>
+        <td style="text-align:center;font-family:var(--fd);font-weight:800;font-size:7pt">82</td>
+        <td style="text-align:center"><input class="frm-input" data-k="n2_pres" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="n2_aus" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center;font-size:5.5pt;color:var(--red);font-weight:700">15 min</td>
+        <td style="text-align:center"><select class="frm-select" data-k="n2_status" style="font-size:5.5pt"><option value="">—</option><option>OK</option><option>Ocorrência</option></select></td>
+        <td><input class="frm-input" data-k="n2_obs" style="width:100%;font-size:5.5pt" placeholder="Observações"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="tk-badge orange">N3S1-A</span></td>
+        <td style="font-size:6pt">Nível 3 — EM (1ª, 2ª, 3ª)</td>
+        <td style="text-align:center;font-family:var(--fd);font-weight:800;font-size:7pt">100</td>
+        <td style="text-align:center"><input class="frm-input" data-k="n3s1_pres" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="n3s1_aus" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center;font-size:5.5pt;color:var(--red);font-weight:700">15 min</td>
+        <td style="text-align:center"><select class="frm-select" data-k="n3s1_status" style="font-size:5.5pt"><option value="">—</option><option>OK</option><option>Ocorrência</option></select></td>
+        <td><input class="frm-input" data-k="n3s1_obs" style="width:100%;font-size:5.5pt" placeholder="Observações"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="tk-badge green">N3S2-A</span></td>
+        <td style="font-size:6pt">Nível 3 — EM (1ª, 2ª, 3ª)</td>
+        <td style="text-align:center;font-family:var(--fd);font-weight:800;font-size:7pt">19</td>
+        <td style="text-align:center"><input class="frm-input" data-k="n3s2_pres" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="n3s2_aus" style="width:15mm;text-align:center" placeholder="—"></td>
+        <td style="text-align:center;font-size:5.5pt;color:var(--red);font-weight:700">15 min</td>
+        <td style="text-align:center"><select class="frm-select" data-k="n3s2_status" style="font-size:5.5pt"><option value="">—</option><option>OK</option><option>Ocorrência</option></select></td>
+        <td><input class="frm-input" data-k="n3s2_obs" style="width:100%;font-size:5.5pt" placeholder="Observações"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="display:flex;gap:4mm;font-size:6pt;color:#475569">
+    <span>Total previsto: <strong style="color:var(--navy)">281</strong></span>
+    <span>Total presentes: <strong style="color:var(--green)"><input class="frm-input" data-k="total_pres" style="width:12mm;text-align:center;font-size:6.5pt" placeholder="—"></strong></span>
+    <span>Total ausentes: <strong style="color:var(--red)"><input class="frm-input" data-k="total_aus" style="width:12mm;text-align:center;font-size:6.5pt" placeholder="—"></strong></span>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="foot-l"><strong>OMASP 2026 — Fase 3</strong> · PEC · SEDUC-SP · URE Caieiras</div>
+  <div class="foot-r">Página 1 de 3</div>
+</div>
+</div></div>
+
+<!-- ============ PÁGINA 2 ============ -->
+<div class="page">
+<div class="band"></div>
+<div class="inner">
+
+<!-- INFRAESTRUTURA -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">4</div><div class="sec-title">Verificação de Infraestrutura e Condições do Polo</div></div>
+  <div class="sec-line"></div>
+  <div class="chk-grid">
+    <label class="frm-chk"><input type="checkbox" data-k="chk_internet"> Internet funcionando e estável durante toda a prova</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_energia"> Energia elétrica sem interrupções</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_equip"> Computadores/tablets carregados e funcionais</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_data"> Data e hora dos equipamentos atualizadas</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_salas"> Salas organizadas com visão para fiscais</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_nav"> Navegador atualizado (Chrome/Edge)</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_cel"> Celulares recolhidos/desligados</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_ban"> Banheiros acessíveis e sinalização adequada</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_ponto"> Ponto de encontro definido para estudantes</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_fiscais"> Fiscais posicionados nas salas antes das 09:00</label>
+  </div>
+  <p style="margin-top:2mm"><strong>Observações sobre infraestrutura:</strong></p>
+  <textarea class="frm-input small" data-k="obs_infra" placeholder="Descreva observações relevantes sobre a infraestrutura do polo..."></textarea>
+</div>
+
+<!-- PROVA -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">5</div><div class="sec-title">Acompanhamento da Aplicação (Manhã — 09:00 às 11:00)</div></div>
+  <div class="sec-line"></div>
+  <div class="hl-box orange">
+    <div class="hl-t">Seção referente ao período da manhã</div>
+    <p>Registre aqui as observações feitas durante o período de aplicação da prova. Este bloco pode ser preenchido com base no relato da equipe gestora e fiscais, caso o PEC não tenha estado presente no turno matutino.</p>
+  </div>
+  <div class="chk-grid">
+    <label class="frm-chk"><input type="checkbox" data-k="chk_inicio"> Prova iniciou no horário previsto (09:00)</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_fiscal_pres"> Fiscal(is) presente(s) durante toda a aplicação</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_rascunho"> Alunos orientados sobre "Salvar Rascunho"</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_finalizar"> Alunos orientados sobre "Finalizar Prova"</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_circulou"> Fiscal circulou entre os alunos</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_aba"> Navegadores com apenas a aba de prova aberta</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_fim11"> Prova encerrada no horário (11:00)</label>
+    <label class="frm-chk"><input type="checkbox" data-k="chk_fim_ok"> Todos clicaram em "Finalizar Prova"</label>
+  </div>
+  <p style="margin-top:2mm"><strong>Observações sobre a aplicação:</strong></p>
+  <textarea class="frm-input medium" data-k="obs_manha" placeholder="Descreva como foi a aplicação: aderência dos alunos, problemas técnicos, tentativas de cola, atrasos, comportamento geral..."></textarea>
+</div>
+
+<!-- VISITA TARDE -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">6</div><div class="sec-title">Visita do PEC — Tarde (14:00 às 17:00)</div></div>
+  <div class="sec-line"></div>
+  <div class="hl-box blue">
+    <div class="hl-t">Período principal de atuação do PEC</div>
+    <p>O PEC continua no polo, no período da tarde para realizar o acompanhamento pedagógico pós-aplicação: reunião com a gestão, análise da condução da prova, orientações e encaminhamentos.</p>
+  </div>
+  <p style="font-size:7pt"><strong>Reunião com equipe gestora:</strong></p>
+  <textarea class="frm-input small" data-k="reuniao_tarde" placeholder="Quem recebeu o PEC, principais pontos discutidos sobre a aplicação da manhã, participação geral dos estudantes..."></textarea>
+  <p style="font-size:7pt;margin-top:2mm"><strong>Contexto do Acompanhamento Pedagógico:</strong></p>
+  <textarea class="frm-input medium" data-k="contexto" placeholder="Descreva o contexto do acompanhamento: condução da aplicação, registros pedagógicos, organização das turmas, participação dos estudantes, pontos de atenção identificados..."></textarea>
+</div>
+
+<!-- OCORRÊNCIAS -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">7</div><div class="sec-title">Ocorrências Registradas</div></div>
+  <div class="sec-line"></div>
+  <table class="stbl">
+    <thead>
+      <tr>
+        <th style="width:16mm;text-align:center">Horário</th>
+        <th style="width:18mm;text-align:center">Turma</th>
+        <th style="width:22mm;text-align:center">Período</th>
+        <th>Tipo de Ocorrência</th>
+        <th style="width:35mm;text-align:center">Encaminhamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center"><input class="frm-input" data-k="oc1_h" style="width:14mm;text-align:center;font-size:6pt" placeholder="00:00"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="oc1_t" style="width:14mm;text-align:center;font-size:6pt" placeholder="—"></td>
+        <td style="text-align:center"><select class="frm-select" data-k="oc1_p" style="font-size:5.5pt"><option value="">—</option><option>Manhã</option><option>Tarde</option></select></td>
+        <td><input class="frm-input" data-k="oc1_desc" style="width:100%;font-size:6pt" placeholder="Descrição"></td>
+        <td><input class="frm-input" data-k="oc1_enc" style="width:100%;font-size:6pt" placeholder="Encaminhamento"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><input class="frm-input" data-k="oc2_h" style="width:14mm;text-align:center;font-size:6pt" placeholder="00:00"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="oc2_t" style="width:14mm;text-align:center;font-size:6pt" placeholder="—"></td>
+        <td style="text-align:center"><select class="frm-select" data-k="oc2_p" style="font-size:5.5pt"><option value="">—</option><option>Manhã</option><option>Tarde</option></select></td>
+        <td><input class="frm-input" data-k="oc2_desc" style="width:100%;font-size:6pt" placeholder="Descrição"></td>
+        <td><input class="frm-input" data-k="oc2_enc" style="width:100%;font-size:6pt" placeholder="Encaminhamento"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><input class="frm-input" data-k="oc3_h" style="width:14mm;text-align:center;font-size:6pt" placeholder="00:00"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="oc3_t" style="width:14mm;text-align:center;font-size:6pt" placeholder="—"></td>
+        <td style="text-align:center"><select class="frm-select" data-k="oc3_p" style="font-size:5.5pt"><option value="">—</option><option>Manhã</option><option>Tarde</option></select></td>
+        <td><input class="frm-input" data-k="oc3_desc" style="width:100%;font-size:6pt" placeholder="Descrição"></td>
+        <td><input class="frm-input" data-k="oc3_enc" style="width:100%;font-size:6pt" placeholder="Encaminhamento"></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><input class="frm-input" data-k="oc4_h" style="width:14mm;text-align:center;font-size:6pt" placeholder="00:00"></td>
+        <td style="text-align:center"><input class="frm-input" data-k="oc4_t" style="width:14mm;text-align:center;font-size:6pt" placeholder="—"></td>
+        <td style="text-align:center"><select class="frm-select" data-k="oc4_p" style="font-size:5.5pt"><option value="">—</option><option>Manhã</option><option>Tarde</option></select></td>
+        <td><input class="frm-input" data-k="oc4_desc" style="width:100%;font-size:6pt" placeholder="Descrição"></td>
+        <td><input class="frm-input" data-k="oc4_enc" style="width:100%;font-size:6pt" placeholder="Encaminhamento"></td>
+      </tr>
+    </tbody>
+  </table>
+  <label class="frm-chk" style="margin-top:1mm"><input type="checkbox" data-k="chk_sem_ocorrencia"> Nenhuma ocorrência registrada durante todo o dia.</label>
+</div>
+
+<div class="foot">
+  <div class="foot-l"><strong>OMASP 2026 — Fase 3</strong> · PEC · SEDUC-SP · URE Caieiras</div>
+  <div class="foot-r">Página 2 de 3</div>
+</div>
+</div></div>
+
+<!-- ============ PÁGINA 3 ============ -->
+<div class="page">
+<div class="band"></div>
+<div class="inner">
+
+<!-- QA / DC -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">8</div><div class="sec-title">Análise Pedagógica — QA / DC</div></div>
+  <div class="sec-line"></div>
+  <div class="qa-grid">
+    <div class="qa-box orange">
+      <div class="qa-t">QA <span class="qa-badge">Qualidade de Aula</span></div>
+      <div class="qa-row"><span class="qr">Organização do polo:</span><select class="frm-select" data-k="qa_org" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Infraestrutura:</span><select class="frm-select" data-k="qa_infra" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Atuação dos fiscais:</span><select class="frm-select" data-k="qa_fiscais" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Ambiente de prova:</span><select class="frm-select" data-k="qa_ambiente" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Gestão do tempo:</span><select class="frm-select" data-k="qa_tempo" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Conferência finalização:</span><select class="frm-select" data-k="qa_fim" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row" style="border-top:1.5px solid var(--orange);padding-top:1.5mm;margin-top:1mm"><span class="qr" style="font-weight:800;font-size:6pt">CLASSIFICAÇÃO:</span><select class="frm-select" data-k="qa_geral" style="font-size:6pt;font-weight:800;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+    </div>
+    <div class="qa-box blue">
+      <div class="qa-t">DC <span class="qa-badge">Desenvolvimento Curricular</span></div>
+      <div class="qa-row"><span class="qr">Condução da aplicação:</span><select class="frm-select" data-k="dc_conducao" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Registros pedagógicos:</span><select class="frm-select" data-k="dc_registros" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Atualizados</option><option>Parcialmente</option><option>Não realizados</option></select></div>
+      <div class="qa-row"><span class="qr">Participação dos estudantes:</span><select class="frm-select" data-k="dc_participacao" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótima</option><option>Bom</option><option>Regular</option><option>Baixa</option></select></div>
+      <div class="qa-row"><span class="qr">Organização das turmas:</span><select class="frm-select" data-k="dc_turmas" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+      <div class="qa-row"><span class="qr">Encaminhamentos pós-prova:</span><select class="frm-select" data-k="dc_enc" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Definidos</option><option>Parcialmente</option><option>Pendente</option></select></div>
+      <div class="qa-row"><span class="qr">Diário de Classe atualizado:</span><select class="frm-select" data-k="dc_diario" style="font-size:5.5pt;flex:1"><option value="">—</option><option>Sim</option><option>Em andamento</option><option>Não</option></select></div>
+      <div class="qa-row" style="border-top:1.5px solid var(--blue);padding-top:1.5mm;margin-top:1mm"><span class="qr" style="font-weight:800;font-size:6pt">CLASSIFICAÇÃO:</span><select class="frm-select" data-k="dc_geral" style="font-size:6pt;font-weight:800;flex:1"><option value="">—</option><option>Ótimo</option><option>Bom</option><option>Regular</option><option>Insuficiente</option></select></div>
+    </div>
+  </div>
+</div>
+
+<!-- ENCAMINHAMENTOS -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">9</div><div class="sec-title">Orientações e Encaminhamentos Pós-Aplicação</div></div>
+  <div class="sec-line"></div>
+  <div class="chk-grid">
+    <label class="frm-chk"><input type="checkbox" data-k="enc_dc"> Registrar ocorrências no Diário de Classe (SED)</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_aus"> Marcar ausência de estudantes que não compareceram</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_devolucao"> Devolução de celulares e pertences dos estudantes</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_token"> Verificar se todos os tokens foram utilizados corretamente</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_finalizar"> Conferência final: todos os alunos clicaram em "Finalizar Prova"</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_registro"> Registro completo de todas as ocorrências do dia</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_pontofocal"> Informar ponto focal da URE sobre ocorrências relevantes</label>
+    <label class="frm-chk"><input type="checkbox" data-k="enc_relatorio"> Relatório do PEC preenchido e assinado</label>
+  </div>
+  <p style="margin-top:2mm"><strong>Observações complementares:</strong></p>
+  <textarea class="frm-input small" data-k="obs_enc" placeholder="Outras orientações ou encaminhamentos realizados..."></textarea>
+</div>
+
+<!-- CONSIDERAÇÕES FINAIS -->
+<div class="sec">
+  <div class="sec-hdr"><div class="sec-num">10</div><div class="sec-title">Considerações Finais</div></div>
+  <div class="sec-line"></div>
+  <textarea class="frm-input large" data-k="consideracoes" placeholder="Descreva as considerações finais sobre o dia de aplicação: como foi o acompanhamento como um todo, pontos positivos, pontos de melhoria, participação dos estudantes, condução da prova pela equipe gestora e fiscais, infraestrutura do polo, encaminhamentos necessários..."></textarea>
+</div>
+
+<!-- ENCERRAMENTO -->
+<div class="sec">
+  <p style="font-size:7pt;line-height:1.65;text-align:justify">
+    Nada mais havendo a tratar, encerro o presente relatório, agradecendo à equipe gestora do(a)
+    <input class="frm-input" data-k="enc_escola" style="width:60mm" placeholder="Nome da escola">,
+    pelo acolhimento, colaboração e compromisso com a qualidade da condução da aplicação da OMASP — Fase 3,
+    desejando êxito em todas as ações pedagógicas desenvolvidas.
+  </p>
+  <p style="font-size:7pt;text-align:right;margin-top:3mm;color:var(--navy);font-family:var(--fd);font-weight:700">
+    <input class="frm-input" data-k="enc_cidade" style="width:25mm" placeholder="Cidade">,
+    <input class="frm-input" data-k="enc_dia" style="width:8mm;text-align:center" placeholder="06"> de
+    <input class="frm-input" data-k="enc_mes" style="width:18mm" placeholder="agosto"> de 2026
+  </p>
+</div>
+
+<div class="sig-area">
+  <div class="sig-block">
+    <div class="sig-line"></div>
+    <div class="sig-label"><input class="frm-input" data-k="sig_pec" style="width:100%;text-align:center;font-family:var(--fd);font-weight:700;font-size:5pt;border:none" placeholder="Nome do PEC"></div>
+    <div class="sig-sub">PEC — Professor Especialista em Currículo</div>
+  </div>
+  <div class="sig-block">
+    <div class="sig-line"></div>
+    <div class="sig-label"><input class="frm-input" data-k="sig_dir" style="width:100%;text-align:center;font-family:var(--fd);font-weight:700;font-size:5pt;border:none" placeholder="Nome do Diretor(a)"></div>
+    <div class="sig-sub">Diretor(a) do Polo / Escola</div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="foot-l"><strong>OMASP 2026 — Fase 3</strong> · PEC · SEDUC-SP · URE Caieiras</div>
+  <div class="foot-r">Página 3 de 3</div>
+</div>
+</div></div>
+
+<script>
+const STORAGE_KEY='omasp-pec-relatorio-v2';
+function getAllInputs(){return document.querySelectorAll('[data-k]')}
+function saveData(){
+  const data={};
+  getAllInputs().forEach(el=>{const k=el.dataset.k;if(el.type==='checkbox')data[k]=el.checked;else data[k]=el.value});
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){}
+  const ind=document.getElementById('saveInd');ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000);
+}
+function loadData(){
+  try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const data=JSON.parse(raw);
+  getAllInputs().forEach(el=>{const k=el.dataset.k;if(data[k]!==undefined){if(el.type==='checkbox')el.checked=data[k];else el.value=data[k]}})}catch(e){}
+}
+function clearData(){
+  if(!confirm('Tem certeza que deseja limpar todos os campos?'))return;
+  getAllInputs().forEach(el=>{if(el.type==='checkbox')el.checked=false;else if(el.tagName==='SELECT')el.value='';else el.value=''});
+  try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+}
+loadData();setInterval(saveData,10000);
+getAllInputs().forEach(el=>{el.addEventListener('change',saveData);el.addEventListener('input',()=>{clearTimeout(el._t);el._t=setTimeout(saveData,1000)})});
+</script>
+
+</body>
+</html>

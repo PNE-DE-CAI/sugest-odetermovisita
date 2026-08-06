@@ -3,30 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OMASP 2026 — Relatório de Visita PEC — Dia de Aplicação — Fase 3" />
   <title>OMASP 2026 · Relatório de Visita PEC — Dia de Aplicação</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     @page{size:A4 portrait;margin:10mm 12mm}
     :root{
       --navy:#0a2f6c;--navy-deep:#041a3a;
       --red:#d32f2f;--gold:#ffec9e;--gold-solid:#e8b930;
       --green:#16a34a;--orange:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;
-      --fd:'Syne',sans-serif;--fb:'Source Serif 4',Georgia,serif;
+      --fd:'Syne','Segoe UI',Tahoma,sans-serif;
+      --fb:'Source Serif 4','Georgia','Times New Roman',serif;
       --bg:#071525;
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:var(--fb);background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--fb);background:var(--bg);display:flex;flex-direction:column;align-items:center;padding:16px;-webkit-font-smoothing:antialiased;color-scheme:light dark}
 
     .snav{position:sticky;top:0;z-index:200;background:#0f1a24;border-radius:16px;padding:8px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;border:1px solid #2c4c6e;max-width:210mm;width:100%;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
-    .snav button{background:var(--navy);color:white;border:1px solid rgba(255,255,255,0.1);border-radius:30px;padding:7px 16px;font-family:var(--fd);font-weight:700;font-size:11px;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:5px}
+    .snav button{background:var(--navy);color:white;border:1px solid rgba(255,255,255,0.1);border-radius:30px;padding:7px 16px;font-family:var(--fd);font-weight:700;font-size:11px;cursor:pointer;transition:background 0.2s,transform 0.2s;display:flex;align-items:center;gap:5px;line-height:1.2}
     .snav button:hover{background:var(--red);transform:scale(1.03)}
+    .snav button:active{transform:scale(0.97)}
     .snav button.green-btn{background:var(--green)}.snav button.green-btn:hover{background:#15803d}
     .snav button.orange-btn{background:var(--orange)}.snav button.orange-btn:hover{background:#d97706}
-    .snav .sep{width:1px;height:18px;background:#2c4c6e}
-    .snav .lbl{font-family:var(--fd);font-size:8px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em}
-    .snav .save-ind{font-family:var(--fd);font-size:8px;font-weight:700;color:var(--green);opacity:0;transition:opacity 0.3s}
+    .snav .sep{width:1px;height:18px;background:#2c4c6e;flex-shrink:0}
+    .snav .lbl{font-family:var(--fd);font-size:8px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap}
+    .snav .save-ind{font-family:var(--fd);font-size:8px;font-weight:700;color:var(--green);opacity:0;transition:opacity 0.3s;white-space:nowrap}
     .snav .save-ind.show{opacity:1}
 
     .page{width:210mm;min-height:297mm;background:white;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3);margin-bottom:14px;page-break-after:always}
@@ -136,10 +139,17 @@
       body{background:white;padding:0;margin:0}
       .page{box-shadow:none;width:100%;min-height:auto;margin-bottom:0}
       .snav{display:none!important}
-      .band,.info-tbl th,.sec-num,.hdr-badge,.tk-table th,.tk-badge,.qa-box,.hl-box,.tl-dot,.tl-section-label{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .band,.info-tbl th,.sec-num,.hdr-badge,.tk-table th,.tk-badge,.qa-box,.hl-box,.tl-dot,.tl-section-label{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
       .frm-input,.frm-select,textarea.frm-input{border-bottom-color:#999!important;border-color:#999!important}
     }
-    @media(max-width:800px){body{padding:8px}.page{width:100%;min-height:auto;border-radius:10px}.qa-grid,.chk-grid{grid-template-columns:1fr}}
+    @media(max-width:800px){
+      body{padding:8px}
+      .page{width:100%;min-height:auto;border-radius:10px}
+      .qa-grid,.chk-grid{grid-template-columns:1fr}
+      .hdr{flex-direction:column;gap:2mm}
+      .hdr-r{text-align:left}
+      .sig-area{flex-direction:column;gap:4mm}
+    }
   </style>
 </head>
 <body>
@@ -147,9 +157,9 @@
 <div class="snav">
   <span class="lbl">Relatório PEC · OMASP Fase 3</span>
   <span class="sep"></span>
-  <button class="green-btn" onclick="saveData()">&#128190; Salvar Rascunho</button>
-  <button class="orange-btn" onclick="clearData()">&#128465; Limpar Tudo</button>
-  <button onclick="window.print()">&#128424; Imprimir / PDF</button>
+  <button class="green-btn" type="button" onclick="saveData()">&#128190; Salvar Rascunho</button>
+  <button class="orange-btn" type="button" onclick="clearData()">&#128465; Limpar Tudo</button>
+  <button type="button" onclick="window.print()">&#128424; Imprimir / PDF</button>
   <span class="save-ind" id="saveInd">&#10003; Salvo</span>
 </div>
 
@@ -160,11 +170,11 @@
 
 <div class="hdr">
   <div class="hdr-l">
-    <h1>Relatório de Visita — Dia de Aplicação<br/>OMASP 2026 — Fase 3</h1>
+    <h1>Relatório de Visita — Dia de Aplicação<br>OMASP 2026 — Fase 3</h1>
     <div class="sub">Acompanhamento Pedagógico · PEC · Manhã/Tarde · URE Caieiras</div>
   </div>
   <div class="hdr-r">
-    <div class="hdr-badge">OMASP · FASE 3 · 06/08/2026</div><br/>
+    <div class="hdr-badge">OMASP · FASE 3 · 06/08/2026</div><br>
     <div class="hdr-doc">Documento do PEC</div>
   </div>
 </div>
@@ -186,8 +196,8 @@
   <tr><th>Data da Visita</th><td><input class="frm-input" data-k="data_visita" type="date" value="2026-08-06" style="max-width:30mm"></td></tr>
   <tr><th>Período da Visita PEC</th><td>
     <label class="frm-chk" style="display:inline-flex;margin-right:4mm"><input type="checkbox" data-k="p_manha"> Manhã</label>
-    <label class="frm-chk" style="display:inline-flex;margin-right:4mm"><input type="checkbox" data-k="p_tarde" checked> Tarde</label>
-    <label class="frm-chk" style="display:inline-flex"><input type="checkbox" data-k="p_noite" checked> Manhã/Tarde</label>
+    <label class="frm-chk" style="display:inline-flex;margin-right:4mm"><input type="checkbox" data-k="p_tarde"> Tarde</label>
+    <label class="frm-chk" style="display:inline-flex"><input type="checkbox" data-k="p_noite"> Manhã/Tarde</label>
   </td></tr>
   <tr><th>Objetivo / Foco</th><td><strong style="font-size:7pt">Acompanhamento integral da aplicação da OMASP — Fase 3 (Etapa Estadual)</strong></td></tr>
 </table>
@@ -583,25 +593,64 @@
 </div></div>
 
 <script>
-const STORAGE_KEY='omasp-pec-relatorio-v2';
-function getAllInputs(){return document.querySelectorAll('[data-k]')}
-function saveData(){
-  const data={};
-  getAllInputs().forEach(el=>{const k=el.dataset.k;if(el.type==='checkbox')data[k]=el.checked;else data[k]=el.value});
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){}
-  const ind=document.getElementById('saveInd');ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000);
-}
-function loadData(){
-  try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const data=JSON.parse(raw);
-  getAllInputs().forEach(el=>{const k=el.dataset.k;if(data[k]!==undefined){if(el.type==='checkbox')el.checked=data[k];else el.value=data[k]}})}catch(e){}
-}
-function clearData(){
-  if(!confirm('Tem certeza que deseja limpar todos os campos?'))return;
-  getAllInputs().forEach(el=>{if(el.type==='checkbox')el.checked=false;else if(el.tagName==='SELECT')el.value='';else el.value=''});
-  try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
-}
-loadData();setInterval(saveData,10000);
-getAllInputs().forEach(el=>{el.addEventListener('change',saveData);el.addEventListener('input',()=>{clearTimeout(el._t);el._t=setTimeout(saveData,1000)})});
+(function(){
+  var STORAGE_KEY = 'omasp-pec-relatorio-v2';
+
+  function getAllInputs(){
+    return document.querySelectorAll('[data-k]');
+  }
+
+  function saveData(){
+    var data = {};
+    getAllInputs().forEach(function(el){
+      var k = el.getAttribute('data-k');
+      if(el.type === 'checkbox') data[k] = el.checked;
+      else data[k] = el.value;
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e){}
+    var ind = document.getElementById('saveInd');
+    if(ind){ ind.classList.add('show'); setTimeout(function(){ ind.classList.remove('show'); }, 2000); }
+  }
+
+  function loadData(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw);
+      getAllInputs().forEach(function(el){
+        var k = el.getAttribute('data-k');
+        if(data[k] !== undefined){
+          if(el.type === 'checkbox') el.checked = data[k];
+          else el.value = data[k];
+        }
+      });
+    } catch(e){}
+  }
+
+  function clearData(){
+    if(!confirm('Tem certeza que deseja limpar todos os campos?')) return;
+    getAllInputs().forEach(function(el){
+      if(el.type === 'checkbox') el.checked = false;
+      else if(el.tagName === 'SELECT') el.value = '';
+      else el.value = '';
+    });
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+  }
+
+  window.saveData = saveData;
+  window.clearData = clearData;
+
+  loadData();
+  setInterval(saveData, 10000);
+
+  getAllInputs().forEach(function(el){
+    el.addEventListener('change', saveData);
+    el.addEventListener('input', function(){
+      clearTimeout(el._t);
+      el._t = setTimeout(saveData, 1000);
+    });
+  });
+})();
 </script>
 
 </body>
